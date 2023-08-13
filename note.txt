@@ -1,0 +1,12 @@
+1. Product filtering
+    - Category based filter
+    - Price based filter
+    - search base filter 
+    - filter applied data
+
+2. product pagination
+    - page size based filter
+
+3. Product selection
+    - multiple product slection 
+    - single product selection 
