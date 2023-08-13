@@ -28,6 +28,9 @@
   </div>
 </template>
 
+<!-- FUNCTIONALITY -->
 <script>
-export default {};
+export default {
+  props: {},
+};
 </script>

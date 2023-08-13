@@ -1,20 +1,34 @@
 <template>
-  <main class="bg-gray-900 min-h-screen px-4">
-    <div class="container mx-auto pt-8">
-      <div class="bg-gray-800 py-5 rounded-xl mb-10 p-4">
-        <ProductFilterActions />
+  <Layout>
+    <template #actions>
+      <!-- Action -->
+      <ProductFilterActions />
 
-        <ProductFilterViewer />
-      </div>
+      <!-- Action Applied -->
+      <ProductFilterViewer />
+    </template>
 
-      <div class="relative bg-gray-800 rounded-md">
-        <ProductTable />
-      </div>
-    </div>
-  </main>
+    <!-- Product Table -->
+    <ProductTable :products="products" />
+  </Layout>
 </template>
 
 <!-- FUNCTIONALITY -->
 <script>
-export default {};
+import Layout from "./components/Layout.vue";
+import { categories } from "./data/categories";
+import { products } from "./data/products";
+
+export default {
+  data() {
+    return {
+      categories: [...categories],
+      products: [...products],
+    };
+  },
+
+  components: {
+    Layout,
+  },
+};
 </script>

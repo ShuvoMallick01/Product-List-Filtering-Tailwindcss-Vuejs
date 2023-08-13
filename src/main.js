@@ -8,6 +8,7 @@ import ProductFilterActions from "./components/ProductFilterActions.vue";
 import ProductFilterViewer from "./components/ProductFilterViewer.vue";
 import ProductTable from "./components/ProductTable.vue";
 import ProductTableHead from "./components/ProductTableHead.vue";
+import ProductTableDataRow from "./components/ProductTableDataRow.vue";
 
 const app = createApp(App);
 
@@ -16,5 +17,6 @@ app.component("ProductFilterActions", ProductFilterActions);
 app.component("ProductFilterViewer", ProductFilterViewer);
 app.component("ProductTable", ProductTable);
 app.component("ProductTableHead", ProductTableHead);
+app.component("ProductTableDataRow", ProductTableDataRow);
 
 app.mount("#app");
