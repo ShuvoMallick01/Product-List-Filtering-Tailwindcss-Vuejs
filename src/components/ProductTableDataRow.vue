@@ -7,6 +7,7 @@
     <td class="md:px-4 lg:px-5 px-3 py-4">{{ product.price }}</td>
     <td
       class="md:px-4 lg:px-5 px-3 py-4 text-2xl text-center cursor-pointer hover:text-red-400"
+      @click="handleProductDelete(product.id)"
     >
       &times;
     </td>
@@ -23,5 +24,7 @@ export default {
       default: {},
     },
   },
+
+  inject: ["handleProductDelete"],
 };
 </script>

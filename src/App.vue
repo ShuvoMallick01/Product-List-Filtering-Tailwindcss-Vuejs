@@ -5,7 +5,10 @@
       <ProductFilterActions :categories="categories" v-model="filter" />
 
       <!-- Action Applied -->
-      <ProductFilterViewer />
+      <ProductFilterViewer
+        :filter="filter"
+        :handleFilterDelete="handleFilterDelete"
+      />
     </template>
 
     <!-- Product Table -->
@@ -26,6 +29,23 @@ export default {
       products: [...products],
       filter: { category: "", sort: "", search: "" },
     };
+  },
+
+  methods: {
+    handleFilterDelete(filterKey) {
+      this.filter[filterKey] = "";
+    },
+
+    async handleProductDelete(productId) {
+      const { isConfirmed } = await this.$swal("Hi there");
+      console.log(isConfirmed);
+
+      if (isConfirmed) {
+        this.products = this.products.filter(
+          (product) => product.id !== productId
+        );
+      }
+    },
   },
 
   computed: {
@@ -61,6 +81,12 @@ export default {
 
       return filterProducts;
     },
+  },
+
+  provide() {
+    return {
+      handleProductDelete: this.handleProductDelete,
+    };
   },
 
   components: {
