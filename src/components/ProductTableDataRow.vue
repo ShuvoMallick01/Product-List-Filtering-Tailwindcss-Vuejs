@@ -6,6 +6,8 @@
         type="checkbox"
         name=""
         id=""
+        :checked="isSelected"
+        @input="handleSelect($event, product.id)"
       />
     </th>
     <th scope="row" class="md:px-4 lg:px-5 px-3 py-4 font-medium">
@@ -33,6 +35,12 @@ export default {
     },
   },
 
-  inject: ["handleProductDelete"],
+  computed: {
+    isSelected() {
+      return this.selected.find((id) => id === this.product.id);
+    },
+  },
+
+  inject: ["handleProductDelete", "selected", "handleSelect"],
 };
 </script>

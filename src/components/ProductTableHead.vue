@@ -9,6 +9,7 @@
           id=""
           @input="handleSelectedAll($event)"
           :indeterminate="selected.length > 0"
+          :checked="selected.length > 0"
         />
       </th>
 

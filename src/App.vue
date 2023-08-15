@@ -11,6 +11,24 @@
       />
     </template>
 
+    <!-- Selected and Delete -->
+    <div
+      v-if="selected.length > 0"
+      :class="'hover:duration-300'"
+      class="flex justify-between items-center text-slate-300 ps-3 px-5"
+    >
+      <p class="">
+        <span>{{ selected.length }}</span> Selected
+      </p>
+
+      <button
+        class="text-3xl hover:text-red-300 hover:duration-200 mb-1.5"
+        @click="handleSelectedProductDelete()"
+      >
+        &times;
+      </button>
+    </div>
+
     <!-- Product Table -->
     <ProductTable :products="filterProdutwithPagination" />
 
@@ -60,6 +78,17 @@ export default {
       }
     },
 
+    async handleSelectedProductDelete() {
+      const { isConfirmed } = await this.$swal("Hi there");
+
+      if (isConfirmed) {
+        this.products = this.products.filter(
+          (product) => !this.selected.includes(product.id)
+        );
+        this.selected = [];
+      }
+    },
+
     handlePrev() {
       if (this.pageIndex > 1) this.pageIndex--;
     },
@@ -73,6 +102,14 @@ export default {
         this.selected = this.filterProducts.map((item) => item.id);
       } else this.selected = [];
       console.log(this.selected);
+    },
+
+    handleSelect(e, productId) {
+      if (e.target.checked) {
+        this.selected.push(productId);
+      } else {
+        this.selected = this.selected.filter((proId) => proId != productId);
+      }
     },
   },
 
@@ -127,6 +164,7 @@ export default {
       handleProductDelete: this.handleProductDelete,
       handleSelectedAll: this.handleSelectedAll,
       selected: computed(() => this.selected),
+      handleSelect: this.handleSelect,
     };
   },
 
