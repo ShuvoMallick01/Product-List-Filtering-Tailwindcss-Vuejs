@@ -12,7 +12,16 @@
     </template>
 
     <!-- Product Table -->
-    <ProductTable :products="filterProducts" />
+    <ProductTable :products="filterProdutwithPagination" />
+
+    <template #pagination>
+      <ProductPagination
+        :pageCount="pageCount"
+        :handlePrev="handlePrev"
+        :handleNext="handleNext"
+        :currentPage="pageIndex"
+      />
+    </template>
   </Layout>
 </template>
 
@@ -21,6 +30,7 @@
 import Layout from "./components/Layout.vue";
 import { categories } from "./data/categories";
 import { products } from "./data/products";
+import { computed } from "vue";
 
 export default {
   data() {
@@ -28,6 +38,9 @@ export default {
       categories: [...categories],
       products: [...products],
       filter: { category: "", sort: "", search: "" },
+      pageIndex: 1,
+      pageSize: 5,
+      selected: [],
     };
   },
 
@@ -45,6 +58,21 @@ export default {
           (product) => product.id !== productId
         );
       }
+    },
+
+    handlePrev() {
+      if (this.pageIndex > 1) this.pageIndex--;
+    },
+
+    handleNext() {
+      if (this.pageIndex < this.pageCount) this.pageIndex++;
+    },
+
+    handleSelectedAll(e) {
+      if (e.target.checked) {
+        this.selected = this.filterProducts.map((item) => item.id);
+      } else this.selected = [];
+      console.log(this.selected);
     },
   },
 
@@ -81,11 +109,24 @@ export default {
 
       return filterProducts;
     },
+
+    pageCount() {
+      return Math.ceil(this.filterProducts.length / this.pageSize);
+    },
+
+    filterProdutwithPagination() {
+      return this.filterProducts.slice(
+        (this.pageIndex - 1) * this.pageSize,
+        this.pageSize * this.pageIndex
+      );
+    },
   },
 
   provide() {
     return {
       handleProductDelete: this.handleProductDelete,
+      handleSelectedAll: this.handleSelectedAll,
+      selected: computed(() => this.selected),
     };
   },
 

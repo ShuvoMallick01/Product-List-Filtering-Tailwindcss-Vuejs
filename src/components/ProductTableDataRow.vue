@@ -1,5 +1,13 @@
 <template>
   <tr class="hover:bg-slate-700/20">
+    <th>
+      <input
+        class="focus:ring-offset-0 focus:ring-0 md:mx-4 lg:mx-5 mx-3 my-4 font-medium"
+        type="checkbox"
+        name=""
+        id=""
+      />
+    </th>
     <th scope="row" class="md:px-4 lg:px-5 px-3 py-4 font-medium">
       {{ product.title }}
     </th>

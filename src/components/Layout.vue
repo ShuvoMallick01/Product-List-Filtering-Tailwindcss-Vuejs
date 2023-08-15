@@ -8,6 +8,8 @@
       <div class="relative bg-gray-800 rounded-md">
         <slot></slot>
       </div>
+
+      <slot name="pagination"></slot>
     </div>
   </main>
 </template>
