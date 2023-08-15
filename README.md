@@ -1,6 +1,8 @@
-# 21-Product-Listing-VueJS
+# Product-List-Filtering-Tailwind-VueJS
 
 This template should help get you started developing with Vue 3 in Vite.
+
+Live: https://product-list-filtering-tailwind-vuejs.netlify.app/
 
 ## Recommended IDE Setup
 

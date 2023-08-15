@@ -33,7 +33,7 @@
     </div>
 
     <!-- PRODUCT SEARCH BOX -->
-    <div class="lg:max-w-xs md:max-w-lg w-full">
+    <div class="lg:max-w-6xl md:max-w-lg w-full">
       <input
         :value="modelValue.search"
         @input="handleChange($event, 'search')"
