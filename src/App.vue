@@ -11,7 +11,7 @@
       />
     </template>
 
-    <!-- Selected and Delete -->
+    <!-- Selected & Delete -->
     <div
       v-if="selected.length > 0"
       :class="'hover:duration-300'"
