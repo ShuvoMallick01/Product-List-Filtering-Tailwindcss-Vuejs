@@ -32,6 +32,18 @@
       </select>
     </div>
 
+    <!-- RATING SELECTION -->
+    <div class="lg:max-w-xs max-w-lg w-full">
+      <select
+        :value="modelValue.rating"
+        @input="handleChange($event, 'rating')"
+        class="bg-gray-100 border border-gray-300 outline-none text-gray-800 text-sm rounded-lg p-3 w-full"
+      >
+        <option value="" selected>Sort By Rating</option>
+        <option v-for="num in 5" :value="num">{{ num }}</option>
+      </select>
+    </div>
+
     <!-- PRODUCT SEARCH BOX -->
     <div class="lg:max-w-6xl md:max-w-lg w-full">
       <input

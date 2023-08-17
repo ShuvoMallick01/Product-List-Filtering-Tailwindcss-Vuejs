@@ -15,6 +15,7 @@ import ProductTableHead from "./components/ProductTableHead.vue";
 import ProductTableDataRow from "./components/ProductTableDataRow.vue";
 import ProductPagination from "./components/ProductPagination.vue";
 
+// MAIN APP
 const app = createApp(App);
 
 // GLOBAL COMPONENT

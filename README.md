@@ -1,6 +1,7 @@
 # 🛍️ Product Listing Filtering Mini VueJS App
 
 🔗 Check it out: Dive into the demo and explore the app's functionalities:
+
 Live Demo Link: https://product-list-filtering-tailwind-vuejs.netlify.app/
 
 Welcome to my dynamic and responsive Product Listing Filtering Mini Web App, using Vue.js and Tailwind CSS!

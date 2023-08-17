@@ -55,7 +55,7 @@ export default {
     return {
       categories: [...categories],
       products: [...products],
-      filter: { category: "", sort: "", search: "" },
+      filter: { category: "", sort: "", rating: "", search: "" },
       pageIndex: 1,
       pageSize: 5,
       selected: [],
@@ -63,10 +63,12 @@ export default {
   },
 
   methods: {
+    // Filter Delete
     handleFilterDelete(filterKey) {
       this.filter[filterKey] = "";
     },
 
+    // Product Delete
     async handleProductDelete(productId) {
       const { isConfirmed } = await this.$swal("Hi there");
       console.log(isConfirmed);
@@ -78,6 +80,7 @@ export default {
       }
     },
 
+    // Select Product Delete
     async handleSelectedProductDelete() {
       const { isConfirmed } = await this.$swal("Hi there");
 
@@ -89,12 +92,15 @@ export default {
       }
     },
 
+    // Pagination
     handlePrev() {
       if (this.pageIndex > 1) this.pageIndex--;
+      console.log(this.pageIndex);
     },
 
     handleNext() {
       if (this.pageIndex < this.pageCount) this.pageIndex++;
+      console.log(this.pageIndex);
     },
 
     handleSelectedAll(e) {
@@ -110,6 +116,10 @@ export default {
       } else {
         this.selected = this.selected.filter((proId) => proId != productId);
       }
+    },
+
+    handleTargetedPagination(num) {
+      this.pageIndex = num;
     },
   },
 
@@ -133,6 +143,21 @@ export default {
             return b.price - a.price;
           }
         });
+      }
+
+      // Rating Filter
+      if (this.filter.rating) {
+        filterProducts = filterProducts.filter(
+          (product) =>
+            Math.round(product.rating.rate) === Number(this.filter.rating)
+        );
+
+        // filterProducts = filterProducts.filter((product) =>
+        //   console.log(
+        //     Math.round(product.rating.rate),
+        //     Number(this.filter.rating)
+        //   )
+        // );
       }
 
       // Search Filter
@@ -165,6 +190,7 @@ export default {
       handleSelectedAll: this.handleSelectedAll,
       selected: computed(() => this.selected),
       handleSelect: this.handleSelect,
+      handleTargetedPagination: this.handleTargetedPagination,
     };
   },
 

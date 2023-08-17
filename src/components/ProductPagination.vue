@@ -16,7 +16,10 @@
         <button
           href="#"
           class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          :class="{ 'dark:bg-slate-700': num === currentPage }"
+          :class="{
+            'dark:bg-slate-700 dark:text-slate-200': num === currentPage,
+          }"
+          @click="handleTargetedPagination(num)"
         >
           {{ num }}
         </button>
@@ -45,5 +48,7 @@ export default {
     handleNext: Function,
     currentPage: Number,
   },
+
+  inject: ["handleTargetedPagination"],
 };
 </script>
