@@ -2,7 +2,7 @@
   <table class="w-full text-sm text-left text-slate-300">
     <ProductTableHead />
 
-    <tbody class="divide-y divide-gray-700 w-full">
+    <tbody class="divide-y divide-gray-700 w-full bg-gray-800">
       <ProductTableDataRow
         v-for="product in products"
         :product="product"

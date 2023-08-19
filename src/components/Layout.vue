@@ -5,7 +5,7 @@
         <slot name="actions"></slot>
       </div>
 
-      <div class="relative bg-gray-800 rounded-md">
+      <div class="rounded-md">
         <slot></slot>
       </div>
 
