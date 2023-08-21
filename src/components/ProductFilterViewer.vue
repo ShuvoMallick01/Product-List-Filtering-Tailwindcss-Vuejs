@@ -34,18 +34,13 @@
 
 <!-- FUNCTIONALITY -->
 <script>
+import { mapActions, mapState } from "pinia";
+import { useProductStore } from "../store/product-store";
+
 export default {
-  props: {
-    filter: {
-      type: Object,
-      default: {},
-      required: true,
-    },
-
-    handleFilterDelete: Function,
-  },
-
   computed: {
+    ...mapState(useProductStore, ["filter"]),
+
     filterList() {
       return Object.keys(this.filter);
     },
@@ -53,6 +48,10 @@ export default {
     hasFilterApplied() {
       return this.filterList.filter((item) => this.filter[item]).length > 0;
     },
+  },
+
+  methods: {
+    ...mapActions(useProductStore, ["handleFilterDelete"]),
   },
 };
 </script>

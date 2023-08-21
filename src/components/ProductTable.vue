@@ -2,9 +2,9 @@
   <table class="w-full text-sm text-left text-slate-300">
     <ProductTableHead />
 
-    <tbody class="divide-y divide-gray-700 w-full">
+    <tbody class="divide-y divide-gray-700 w-full bg-gray-800">
       <ProductTableDataRow
-        v-for="product in products"
+        v-for="product in filterProdutwithPagination"
         :product="product"
         :key="product.id"
       />
@@ -14,13 +14,12 @@
 
 <!-- FUNCTIONALITY -->
 <script>
+import { mapState } from "pinia";
+import { useProductStore } from "../store/product-store";
+
 export default {
-  props: {
-    products: {
-      type: Array,
-      default: [],
-      required: true,
-    },
+  computed: {
+    ...mapState(useProductStore, ["filterProdutwithPagination"]),
   },
 };
 </script>

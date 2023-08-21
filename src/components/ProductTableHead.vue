@@ -1,5 +1,7 @@
 <template>
-  <thead class="text-xs text-gray-200 uppercase bg-gray-700 round-full">
+  <thead
+    class="text-xs text-gray-200 uppercase bg-gray-700 round-full overflow-auto"
+  >
     <tr>
       <th class="md:px-4 lg:px-5 px-3 py-3">
         <input
@@ -22,13 +24,23 @@
 
 <!-- FUNCTIONALITY -->
 <script>
+import { mapActions, mapState } from "pinia";
+import { useProductStore } from "../store/product-store";
+
 export default {
   data() {
     return {
-      columns: ["Name", "Category", "Price", "Action"],
+      columns: ["Image", "Name", "Rating", "Category", "Price", "Action"],
     };
   },
 
-  inject: ["handleSelectedAll", "selected"],
+  methods: {
+    ...mapActions(useProductStore, ["handleSelectedAll"]),
+  },
+
+  computed: {
+    ...mapState(useProductStore, ["selected"]),
+  },
+  // inject: ["handleSelectedAll", "selected"],
 };
 </script>

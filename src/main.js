@@ -15,7 +15,14 @@ import ProductTableHead from "./components/ProductTableHead.vue";
 import ProductTableDataRow from "./components/ProductTableDataRow.vue";
 import ProductPagination from "./components/ProductPagination.vue";
 
+// MAIN APP
 const app = createApp(App);
+
+// PINIA IMPORT
+import { createPinia } from "pinia";
+const pinia = createPinia();
+
+app.use(pinia);
 
 // GLOBAL COMPONENT
 app.component("ProductFilterActions", ProductFilterActions);
