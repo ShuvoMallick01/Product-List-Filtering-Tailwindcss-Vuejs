@@ -17,7 +17,10 @@
         <span>{{ selected.length }}</span> Selected
       </p>
 
-      <button class="text-3xl hover:text-red-300 hover:duration-200 mb-1.5">
+      <button
+        class="text-3xl hover:text-red-300 hover:duration-200 mb-1.5"
+        @click="handleSelectedProductDelete"
+      >
         &times;
       </button>
     </div>
@@ -28,12 +31,13 @@
     <template #pagination>
       <ProductPagination />
     </template>
+    <!-- {{ productsStore }} -->
   </Layout>
 </template>
 
 <!-- FUNCTIONALITY -->
 <script>
-import { mapState } from "pinia";
+import { mapActions, mapState, mapStores } from "pinia";
 import { useProductStore } from "./store/product-store";
 import { computed } from "vue";
 
@@ -42,6 +46,11 @@ import Layout from "./components/Layout.vue";
 export default {
   computed: {
     ...mapState(useProductStore, ["selected"]),
+    // ...mapStores(useProductStore),
+  },
+
+  methods: {
+    // ...mapActions(useProductStore, ["handleSelectedProductDelete"]),
   },
 
   components: {

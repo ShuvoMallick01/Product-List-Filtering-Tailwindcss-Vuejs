@@ -1,58 +1,41 @@
 <template>
   <div class="flex items-center gap-4">
-    <!-- CATEGORY SELECTION -->
-    <div class="lg:max-w-xs max-w-lg w-full">
-      <select
-        :value="filter.category"
-        @input="handleChange($event, 'category')"
-        class="bg-gray-100 border border-gray-300 outline-none text-gray-800 text-sm rounded-lg p-3 w-full"
-      >
-        <option value="" selected>Category</option>
-        <option
-          v-for="category in categories"
-          :key="category"
-          :value="category"
-          class="capitalize"
-        >
-          {{ category }}
-        </option>
-      </select>
-    </div>
+    <!-- CATEGORY -->
+    <Select
+      :title="'Category'"
+      :options="extendCategory"
+      v-model="filter.category"
+    ></Select>
+    <!-- :value="filter.category"
+      @click="handleChange($event, 'category')" -->
 
-    <!-- PRICE SORTING SELECTION -->
-    <div class="lg:max-w-xs max-w-lg w-full">
-      <select
-        :value="filter.sort"
-        @input="handleChange($event, 'sort')"
-        class="bg-gray-100 border border-gray-300 outline-none text-gray-800 text-sm rounded-lg p-3 w-full"
-      >
-        <option value="" selected>Sort By Price</option>
-        <option value="low-high">Low to High</option>
-        <option value="high-low">High to Low</option>
-      </select>
-    </div>
+    <!-- PRICE SORTING -->
+    <Select
+      :title="'Sort By Rating'"
+      :options="sortOptions"
+      v-model="filter.sort"
+    ></Select>
+    <!-- :value="filter.sort"
+      @click="handleChange($event, 'sort')" -->
 
-    <!-- RATING SELECTION -->
-    <div class="lg:max-w-xs max-w-lg w-full">
-      <select
-        :value="filter.rating"
-        @input="handleChange($event, 'rating')"
-        class="bg-gray-100 border border-gray-300 outline-none text-gray-800 text-sm rounded-lg p-3 w-full"
-      >
-        <option value="" selected>Sort By Rating</option>
-        <option v-for="num in 5" :value="num">{{ num }}</option>
-      </select>
-    </div>
+    <!-- RATING -->
+    <Select
+      :title="'Sort by Rating'"
+      :options="ratingOptions"
+      v-model="filter.rating"
+    ></Select>
+    <!-- :value="filter.rating"
+      @click="handleChange($event, 'rating')" -->
 
-    <!-- PRODUCT SEARCH BOX -->
+    <!-- PRODUCT SEARCH -->
     <div class="lg:max-w-6xl md:max-w-lg w-full">
       <input
-        :value="filter.search"
-        @input="handleChange($event, 'search')"
+        v-model="filter.search"
         type="text"
         class="bg-gray-100 border border-gray-300 outline-none text-gray-800 text-sm rounded-lg block w-full p-3"
         placeholder="Search product by name"
       />
+      <!-- @input="handleChange($event, 'search')" -->
     </div>
   </div>
 </template>
@@ -63,13 +46,38 @@ import { mapState } from "pinia";
 import { useProductStore } from "../store/product-store";
 
 export default {
-  methods: {
-    handleChange(e, key) {
-      this.filter[key] = e.target.value;
-    },
+  data() {
+    return {
+      sortOptions: [
+        { id: 1, value: "low-high", title: "Low to High" },
+        { id: 2, value: "high-low", title: "High to Low" },
+      ],
+
+      ratingOptions: [
+        { id: 1, value: 1, title: 1 },
+        { id: 2, value: 2, title: 2 },
+        { id: 3, value: 3, title: 3 },
+        { id: 4, value: 4, title: 4 },
+        { id: 5, value: 5, title: 5 },
+      ],
+    };
   },
 
+  // methods: {
+  //   handleChange(e, key) {
+  //     this.filter[key] = e.target.value;
+  //   },
+  // },
+
   computed: {
+    extendCategory() {
+      return this.categories.map((item) => ({
+        id: item,
+        value: item,
+        title: item,
+      }));
+    },
+
     ...mapState(useProductStore, ["categories", "filter"]),
   },
 };

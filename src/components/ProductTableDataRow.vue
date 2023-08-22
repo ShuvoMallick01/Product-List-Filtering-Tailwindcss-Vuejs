@@ -7,9 +7,9 @@
         name=""
         id=""
         :checked="isSelected"
+        @input="handleSelect($event, product.id)"
       />
     </td>
-    <!-- @input="handleSelect($event, product.id)" -->
 
     <td><img :src="product.image" class="w-10" alt="" /></td>
     <td scope="row" class="md:px-4 lg:px-5 px-3 py-4 font-medium">
@@ -32,15 +32,18 @@
     <td class="md:px-4 lg:px-5 px-3 py-4">{{ product.price }}</td>
     <td
       class="md:px-4 lg:px-5 px-3 py-4 text-2xl text-center cursor-pointer hover:text-red-400"
+      @click="handleProductDelete(product.id)"
     >
       &times;
     </td>
-    <!-- @click="handleProductDelete(product.id)" -->
   </tr>
 </template>
 
 <!-- FUNCTIONALITY -->
 <script>
+import { mapActions, mapState } from "pinia";
+import { useProductStore } from "../store/product-store";
+
 export default {
   props: {
     product: {
@@ -50,11 +53,17 @@ export default {
     },
   },
 
-  // computed: {
-  //   isSelected() {
-  //     return this.selected.find((id) => id === this.product.id);
-  //   },
-  // },
+  computed: {
+    ...mapState(useProductStore, ["selected"]),
+
+    isSelected() {
+      return this.selected.find((id) => id === this.product.id);
+    },
+  },
+
+  methods: {
+    ...mapActions(useProductStore, ["handleProductDelete", "handleSelect"]),
+  },
 
   // inject: ["handleProductDelete", "selected", "handleSelect"],
 };

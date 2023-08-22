@@ -14,6 +14,7 @@ import ProductTable from "./components/ProductTable.vue";
 import ProductTableHead from "./components/ProductTableHead.vue";
 import ProductTableDataRow from "./components/ProductTableDataRow.vue";
 import ProductPagination from "./components/ProductPagination.vue";
+import Select from "./components/Select.vue";
 
 // MAIN APP
 const app = createApp(App);
@@ -31,6 +32,7 @@ app.component("ProductTable", ProductTable);
 app.component("ProductTableHead", ProductTableHead);
 app.component("ProductTableDataRow", ProductTableDataRow);
 app.component("ProductPagination", ProductPagination);
+app.component("Select", Select);
 
 // PLUGINS COMPONENT
 app.use(VueSweetalert2, {

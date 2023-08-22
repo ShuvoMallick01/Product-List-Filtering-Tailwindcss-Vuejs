@@ -81,26 +81,35 @@ export const useProductStore = defineStore("products", {
 
     // Product Delete
     async handleProductDelete(productId) {
-      const { isConfirmed } = await this.$swal("Hi there");
-      console.log(isConfirmed);
+      this.products = this.products.filter(
+        (product) => product.id !== productId
+      );
 
-      if (isConfirmed) {
-        this.products = this.products.filter(
-          (product) => product.id !== productId
-        );
-      }
+      // const { isConfirmed } = await this.$swal("Hi there");
+      // console.log(isConfirmed);
+
+      // if (isConfirmed) {
+      //   this.products = this.products.filter(
+      //     (product) => product.id !== productId
+      //   );
+      // }
     },
 
     // Select Product Delete
     async handleSelectedProductDelete() {
-      const { isConfirmed } = await this.$swal("Hi there");
+      this.products = this.products.filter(
+        (product) => !this.selected.includes(product.id)
+      );
+      this.selected = [];
 
-      if (isConfirmed) {
-        this.products = this.products.filter(
-          (product) => !this.selected.includes(product.id)
-        );
-        this.selected = [];
-      }
+      // const { isConfirmed } = await this.$swal("Hi there");
+
+      // if (isConfirmed) {
+      //   this.products = this.products.filter(
+      //     (product) => !this.selected.includes(product.id)
+      //   );
+      //   this.selected = [];
+      // }
     },
 
     // Pagination
