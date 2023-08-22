@@ -7,8 +7,8 @@ export const useProductStore = defineStore("products", {
     categories: [...categories],
     products: [...products],
     filter: { category: "", sort: "", rating: "", search: "" },
-    pageIndex: 1,
-    pageSize: 5,
+    // pageIndex: 1,
+    // pageSize: 5,
     selected: [],
   }),
 
@@ -61,16 +61,16 @@ export const useProductStore = defineStore("products", {
       return filterProducts;
     },
 
-    pageCount() {
-      return Math.ceil(this.filterProducts.length / this.pageSize);
-    },
+    // pageCount() {
+    //   return Math.ceil(this.filterProducts.length / this.pageSize);
+    // },
 
-    filterProdutwithPagination() {
-      return this.filterProducts.slice(
-        (this.pageIndex - 1) * this.pageSize,
-        this.pageSize * this.pageIndex
-      );
-    },
+    // filterProdutwithPagination() {
+    //   return this.filterProducts.slice(
+    //     (this.pageIndex - 1) * this.pageSize,
+    //     this.pageSize * this.pageIndex
+    //   );
+    // },
   },
 
   actions: {
@@ -113,22 +113,26 @@ export const useProductStore = defineStore("products", {
     },
 
     // Pagination
-    handlePrev() {
-      if (this.pageIndex > 1) this.pageIndex--;
-      console.log(this.pageIndex);
-    },
+    // handlePrev() {
+    //   if (this.pageIndex > 1) this.pageIndex--;
+    //   console.log(this.pageIndex);
+    // },
 
-    handleNext() {
-      if (this.pageIndex < this.pageCount) this.pageIndex++;
-      console.log(this.pageIndex);
-    },
+    // handleNext() {
+    //   if (this.pageIndex < this.pageCount) this.pageIndex++;
+    //   console.log(this.pageIndex);
+    // },
 
-    handleSelectedAll(e) {
-      if (e.target.checked) {
-        this.selected = this.filterProducts.map((item) => item.id);
-      } else this.selected = [];
-      console.log(this.selected);
-    },
+    // handleSelectedAll(e) {
+    //   if (e.target.checked) {
+    //     this.selected = this.filterProducts.map((item) => item.id);
+    //   } else this.selected = [];
+    //   console.log(this.selected);
+    // },
+
+    // handleTargetedPagination(num) {
+    //   this.pageIndex = num;
+    // },
 
     handleSelect(e, productId) {
       if (e.target.checked) {
@@ -136,10 +140,6 @@ export const useProductStore = defineStore("products", {
       } else {
         this.selected = this.selected.filter((proId) => proId != productId);
       }
-    },
-
-    handleTargetedPagination(num) {
-      this.pageIndex = num;
     },
   },
 });
