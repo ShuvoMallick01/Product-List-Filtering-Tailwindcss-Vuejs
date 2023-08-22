@@ -63,12 +63,6 @@ export default {
     };
   },
 
-  // methods: {
-  //   handleChange(e, key) {
-  //     this.filter[key] = e.target.value;
-  //   },
-  // },
-
   computed: {
     extendCategory() {
       return this.categories.map((item) => ({

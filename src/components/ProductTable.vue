@@ -15,11 +15,11 @@
 <!-- FUNCTIONALITY -->
 <script>
 import { mapState } from "pinia";
-import { useProductStore } from "../store/product-store";
+import { usePaginationStore } from "../store/product-pagination";
 
 export default {
   computed: {
-    ...mapState(useProductStore, ["filterProdutwithPagination"]),
+    ...mapState(usePaginationStore, ["filterProdutwithPagination"]),
   },
 };
 </script>

@@ -1,19 +1,23 @@
 import { defineStore } from "pinia";
-import productStore from "./product-store";
+import { useProductStore } from "./product-store";
 
 export const usePaginationStore = defineStore("productPagination", {
-  state: {
+  state: () => ({
     pageIndex: 1,
     pageSize: 5,
-  },
+  }),
 
   getters: {
     pageCount() {
-      return Math.ceil(productStore.filterProducts.length / this.pageSize);
+      const { filterProducts } = useProductStore();
+
+      return Math.ceil(filterProducts.length / this.pageSize);
     },
 
     filterProdutwithPagination() {
-      return productStore.filterProducts.slice(
+      const { filterProducts } = useProductStore();
+
+      return filterProducts.slice(
         (this.pageIndex - 1) * this.pageSize,
         this.pageSize * this.pageIndex
       );
@@ -29,13 +33,6 @@ export const usePaginationStore = defineStore("productPagination", {
     handleNext() {
       if (this.pageIndex < this.pageCount) this.pageIndex++;
       console.log(this.pageIndex);
-    },
-
-    handleSelectedAll(e) {
-      if (e.target.checked) {
-        this.selected = productStore.filterProducts.map((item) => item.id);
-      } else this.selected = [];
-      console.log(this.selected);
     },
 
     handleTargetedPagination(num) {

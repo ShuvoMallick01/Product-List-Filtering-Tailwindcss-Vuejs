@@ -64,7 +64,5 @@ export default {
   methods: {
     ...mapActions(useProductStore, ["handleProductDelete", "handleSelect"]),
   },
-
-  // inject: ["handleProductDelete", "selected", "handleSelect"],
 };
 </script>
