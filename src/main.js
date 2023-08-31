@@ -1,6 +1,7 @@
 import "./assets/css/main.css";
 
 import { createApp } from "vue";
+import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
 
 // PLUGINS
@@ -15,6 +16,13 @@ import ProductTableHead from "./components/ProductTableHead.vue";
 import ProductTableDataRow from "./components/ProductTableDataRow.vue";
 import ProductPagination from "./components/ProductPagination.vue";
 import Select from "./components/Select.vue";
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
+import Layout from "./components/Layout.vue";
+
+// IMPORT PAGE
+import Home from "./pages/Home.vue";
+import CreateProduct from "./pages/CreateProduct.vue";
 
 // MAIN APP
 const app = createApp(App);
@@ -23,6 +31,19 @@ const app = createApp(App);
 import { createPinia } from "pinia";
 const pinia = createPinia();
 
+// ROUTE
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: "/", component: Home, name: "home" },
+    { path: "/createproduct", component: CreateProduct, name: "createproduct" },
+
+    // { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
+  ],
+});
+
+// USE
+app.use(router);
 app.use(pinia);
 
 // GLOBAL COMPONENT
@@ -33,6 +54,9 @@ app.component("ProductTableHead", ProductTableHead);
 app.component("ProductTableDataRow", ProductTableDataRow);
 app.component("ProductPagination", ProductPagination);
 app.component("Select", Select);
+app.component("Navbar", Navbar);
+app.component("Footer", Footer);
+app.component("Layout", Layout);
 
 // PLUGINS COMPONENT
 app.use(VueSweetalert2, {
@@ -48,4 +72,5 @@ app.use(VueSweetalert2, {
   icon: "warning",
 });
 
+// MOUNT
 app.mount("#app");
