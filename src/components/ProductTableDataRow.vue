@@ -71,7 +71,7 @@ export default {
 
   methods: {
     productEdit(productId) {
-      console.log(productId);
+      // console.log(productId);
       this.handleProductEdit(productId);
       this.$router.push("/createproduct");
     },
