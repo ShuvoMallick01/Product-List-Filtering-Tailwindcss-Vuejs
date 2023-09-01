@@ -78,7 +78,7 @@
         <div class="relative z-0 w-full mb-6 group">
           <select
             id="rating"
-            class="block py-2.5 capitalize px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-400 border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+            class="block py-2.5 capitalize px-0 w-full text-sm bg-gray-900 border-0 border-b-2 appearance-none text-gray-400 border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer optional:py-3"
             required
             v-model="createProduct.category"
           >
@@ -91,7 +91,7 @@
               Category
             </option>
             <option
-              class="text-gray-600 capitalize"
+              class="text-gray-300 capitalize"
               v-for="category in categories"
               :value="category"
               :key="category"
