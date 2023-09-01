@@ -16,6 +16,8 @@
           required
           v-model="createProduct.title"
         />
+        <!-- :value="createProduct.title" @input="createProduct.title =
+        $event.target.value" -->
 
         <label
           for="productName"
@@ -31,7 +33,7 @@
             id="rating"
             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-400 border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             required
-            v-model="createProduct.rating"
+            v-model="createProduct.rating.rate"
           >
             <option
               class="text-gray-600 disabled:text-slate-400"
@@ -151,7 +153,7 @@ export default {
 
   computed: {
     ...mapWritableState(useProductStore, ["createProduct"]),
-    ...mapState(useProductStore, ["categories", "products"]),
+    ...mapState(useProductStore, ["categories", "products", "createProduct"]),
   },
 };
 </script>

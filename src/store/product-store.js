@@ -8,7 +8,8 @@ export const useProductStore = defineStore("products", {
     products: [...products],
     filter: { category: "", sort: "", rating: "", search: "" },
     selected: [],
-    createProduct: { title: "", price: "", category: "", rating: "" },
+    createProduct: { title: "", price: "", category: "", rating: { rate: "" } },
+    editId: null,
   }),
 
   getters: {
@@ -63,8 +64,7 @@ export const useProductStore = defineStore("products", {
 
   actions: {
     // Create Product
-    handleCreateProduct(product) {
-      // console.log(product, productId);
+    handleCreateProduct(product, productId) {
       // let product = {
       //   id: Number(this.products.length) + 1,
       //   title: this.createProduct.title,
@@ -74,10 +74,49 @@ export const useProductStore = defineStore("products", {
       //   image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
       //   rating: { rate: this.createProduct.rating, count: 120 },
       // };
-      this.products.push(product);
-      console.log(this.products[this.products.length - 1]);
-      this.createProduct = { title: "", price: "", category: "", rating: "" };
-      // console.log(productId);
+
+      if (this.editId) {
+        // console.log("Findout edit id");
+        this.products = this.products.map((product) =>
+          product.id === this.editId
+            ? {
+                ...product,
+                title: this.createProduct.title,
+                price: this.createProduct.price,
+                category: this.createProduct.category,
+                rating: { rate: this.createProduct.rating.rate },
+              }
+            : product
+        );
+
+        this.createProduct = {
+          title: "",
+          price: "",
+          category: "",
+          rating: { rate: "" },
+        };
+        this.editId = "";
+      } else {
+        this.products.push(product);
+
+        this.createProduct = {
+          title: "",
+          price: "",
+          category: "",
+          rating: { rate: "" },
+        };
+      }
+    },
+
+    // Product Edit
+    handleProductEdit(productId) {
+      this.editId = productId;
+      let findProduct = this.products.find((pro) => pro.id === productId);
+
+      this.createProduct.title = findProduct.title;
+      this.createProduct.price = findProduct.price;
+      this.createProduct.category = findProduct.category;
+      this.createProduct.rating.rate = findProduct.rating.rate;
     },
 
     // Filter Delete

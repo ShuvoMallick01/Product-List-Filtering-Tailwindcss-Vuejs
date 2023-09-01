@@ -39,10 +39,7 @@
           &times;
         </button>
 
-        <button
-          class="hover:text-red-400"
-          @click="handleCreateProduct(product.id)"
-        >
+        <button class="hover:text-red-400" @click="productEdit(product.id)">
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
       </div>
@@ -73,10 +70,17 @@ export default {
   },
 
   methods: {
+    productEdit(productId) {
+      console.log(productId);
+      this.handleProductEdit(productId);
+      this.$router.push("/createproduct");
+    },
+
     ...mapActions(useProductStore, [
       "handleProductDelete",
       "handleSelect",
       "handleCreateProduct",
+      "handleProductEdit",
     ]),
   },
 };
