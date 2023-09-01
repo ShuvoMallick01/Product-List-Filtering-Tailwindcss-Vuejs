@@ -5,7 +5,7 @@
     </h2>
 
     <!-- Form -->
-    <form>
+    <form @submit.prevent="createForm">
       <div class="relative z-0 w-full mb-6 group">
         <input
           type="text"
@@ -14,6 +14,7 @@
           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 appearance-none dark:text-white border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
+          v-model="createProduct.title"
         />
 
         <label
@@ -30,6 +31,7 @@
             id="rating"
             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-400 border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             required
+            v-model="createProduct.rating"
           >
             <option
               class="text-gray-600 disabled:text-slate-400"
@@ -39,7 +41,14 @@
             >
               Rating
             </option>
-            <option class="text-gray-600" v-for="num in 5">{{ num }}</option>
+            <option
+              class="text-gray-600"
+              v-for="num in 5"
+              :value="num"
+              :key="num"
+            >
+              {{ num }}
+            </option>
           </select>
         </div>
 
@@ -49,6 +58,7 @@
             id="rating"
             class="block py-2.5 capitalize px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-400 border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             required
+            v-model="createProduct.category"
           >
             <option
               class="text-gray-600 disabled:text-slate-400"
@@ -61,6 +71,8 @@
             <option
               class="text-gray-600 capitalize"
               v-for="category in categories"
+              :value="category"
+              :key="category"
             >
               {{ category }}
             </option>
@@ -77,6 +89,7 @@
           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 appearance-none dark:text-white border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
+          v-model="createProduct.price"
         />
 
         <label
@@ -88,26 +101,57 @@
 
       <button
         type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="text-white me-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Create
       </button>
+
+      <!-- <router-link
+        type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        to="/"
+      >
+        Go Back
+      </router-link> -->
     </form>
   </section>
 </template>
 
 <!-- FUNCTIONALITY -->
 <script>
-import { mapState } from "pinia";
+import { mapActions, mapState, mapWritableState } from "pinia";
 import { useProductStore } from "../store/product-store";
 
 export default {
   data() {
-    return {};
+    return {
+      // createProduct: { title: "", price: "", category: "", rating: "" },
+    };
+  },
+
+  methods: {
+    createForm() {
+      let product = {
+        id: Number(this.products.length) + 1,
+        title: this.createProduct.title,
+        price: this.createProduct.price,
+        description: "NA",
+        category: this.createProduct.category,
+        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        rating: { rate: this.createProduct.rating, count: 120 },
+      };
+
+      this.handleCreateProduct(product);
+      // console.log(product);
+      this.$router.push("/");
+    },
+
+    ...mapActions(useProductStore, ["handleCreateProduct"]),
   },
 
   computed: {
-    ...mapState(useProductStore, ["categories"]),
+    ...mapWritableState(useProductStore, ["createProduct"]),
+    ...mapState(useProductStore, ["categories", "products"]),
   },
 };
 </script>

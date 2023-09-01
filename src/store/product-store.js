@@ -62,6 +62,24 @@ export const useProductStore = defineStore("products", {
   },
 
   actions: {
+    // Create Product
+    handleCreateProduct(product) {
+      // console.log(product, productId);
+      // let product = {
+      //   id: Number(this.products.length) + 1,
+      //   title: this.createProduct.title,
+      //   price: this.createProduct.price,
+      //   description: "NA",
+      //   category: this.createProduct.category,
+      //   image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      //   rating: { rate: this.createProduct.rating, count: 120 },
+      // };
+      this.products.push(product);
+      console.log(this.products[this.products.length - 1]);
+      this.createProduct = { title: "", price: "", category: "", rating: "" };
+      // console.log(productId);
+    },
+
     // Filter Delete
     handleFilterDelete(filterKey) {
       this.filter[filterKey] = "";

@@ -38,7 +38,11 @@
         >
           &times;
         </button>
-        <button class="hover:text-red-400">
+
+        <button
+          class="hover:text-red-400"
+          @click="handleCreateProduct(product.id)"
+        >
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
       </div>
@@ -69,7 +73,11 @@ export default {
   },
 
   methods: {
-    ...mapActions(useProductStore, ["handleProductDelete", "handleSelect"]),
+    ...mapActions(useProductStore, [
+      "handleProductDelete",
+      "handleSelect",
+      "handleCreateProduct",
+    ]),
   },
 };
 </script>
