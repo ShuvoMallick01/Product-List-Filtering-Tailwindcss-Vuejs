@@ -15,9 +15,9 @@
     <td scope="row" class="md:px-4 lg:px-5 px-3 py-4 font-medium">
       {{ product.title }}
     </td>
-    <td>
+    <td class="text-center lg:text-start">
       {{ product.rating.rate }}
-      <div class="flex gap-1">
+      <div class="flex gap-1/2 text-xs">
         <i
           v-for="star in Math.round(product.rating.rate)"
           class="fa-solid fa-star"
@@ -30,11 +30,18 @@
     </td>
     <td class="md:px-4 lg:px-5 px-3 py-4 capitalize">{{ product.category }}</td>
     <td class="md:px-4 lg:px-5 px-3 py-4">{{ product.price }}</td>
-    <td
-      class="md:px-4 lg:px-5 px-3 py-4 text-2xl text-center cursor-pointer hover:text-red-400"
-      @click="handleProductDelete(product.id)"
-    >
-      &times;
+    <td class="md:px-4 lg:px-5 px-3 py-4 text-center">
+      <div class="flex gap-3 items-center">
+        <button
+          class="cursor-pointer text-2xl hover:text-red-400"
+          @click="handleProductDelete(product.id)"
+        >
+          &times;
+        </button>
+        <button class="hover:text-red-400">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+      </div>
     </td>
   </tr>
 </template>

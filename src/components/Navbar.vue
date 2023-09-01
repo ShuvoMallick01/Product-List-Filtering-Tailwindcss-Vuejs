@@ -1,11 +1,11 @@
 <template>
-  <nav class="border-gray-200 container mx-auto">
+  <nav class="border-gray-200 container mx-auto px-4">
     <div class="flex items-center justify-between mx-auto py-5">
       <router-link
         to="/"
-        class="text-2xl font-semibold whitespace-nowrap dark:text-white"
+        class="text-2xl font-bold whitespace-nowrap text-slate-200"
       >
-        Product Listing
+        PRODUCT
       </router-link>
 
       <div class="" id="navbar-default">

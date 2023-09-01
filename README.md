@@ -1,8 +1,8 @@
-# 🛍️ Product Listing Filtering Mini VueJS App using Pinia State Management
+# 🛍️ Product Listing Filtering VueJS App (Included: State Management + Router + Create Product + Edit)
 
 🔗 Check it out: Dive into the demo and explore the app's functionalities:
 
-Live Demo Link: https://product-list-vuejs-pinia-state-manage.netlify.app/
+Live Demo Link: https://product-listing-vuejs-upgrade-v1.netlify.app/
 
 Welcome to my dynamic and responsive Product Listing Filtering Mini Web App, using Vue.js and Tailwind CSS!
 

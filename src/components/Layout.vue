@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-gray-900 min-h-screen md:px-4 px0 mx-auto overflow-x-auto">
+  <main class="bg-gray-900 px-4 px0 mx-auto overflow-x-auto">
     <div class="container mx-auto pt-8">
       <div class="bg-gray-800 py-5 rounded-xl mb-10 p-4">
         <slot name="actions"></slot>

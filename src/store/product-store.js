@@ -7,9 +7,8 @@ export const useProductStore = defineStore("products", {
     categories: [...categories],
     products: [...products],
     filter: { category: "", sort: "", rating: "", search: "" },
-    // pageIndex: 1,
-    // pageSize: 5,
     selected: [],
+    createProduct: { title: "", price: "", category: "", rating: "" },
   }),
 
   getters: {
