@@ -1,5 +1,5 @@
 <template>
-  <div v-if="hasFilterApplied" class="flex items-center gap-3 mt-5">
+  <div v-if="hasFilterApplied" class="flex items-center mt-5 gap-2">
     <div v-for="item in filterList" :key="item">
       <span
         v-if="filter[item]"

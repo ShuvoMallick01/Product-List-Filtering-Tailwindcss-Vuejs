@@ -35,7 +35,7 @@
             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
-            v-model="createProduct.rating.rate"
+            v-model="createProduct.rating"
           />
 
           <label
@@ -123,7 +123,7 @@ export default {
         title: "",
         price: "",
         category: "",
-        rating: { rate: "" },
+        rating: "",
       },
     };
   },
@@ -137,7 +137,7 @@ export default {
         description: "NA",
         category: this.createProduct.category,
         image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        rating: { rate: this.createProduct.rating.rate, count: 120 },
+        rating: { rate: this.createProduct.rating, count: 120 },
       };
 
       this.handleCreateProduct(product);
@@ -148,7 +148,6 @@ export default {
   },
 
   computed: {
-    // ...mapWritableState(useProductStore, ["createProduct"]),
     ...mapState(useProductStore, ["categories", "products", "createProduct"]),
   },
 };

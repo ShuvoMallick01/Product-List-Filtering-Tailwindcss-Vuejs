@@ -35,7 +35,7 @@
             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
-            v-model="editProduct.rating.rate"
+            v-model="editProduct.rating"
           />
 
           <label
@@ -124,7 +124,7 @@ export default {
         title: "",
         price: "",
         category: "",
-        rating: { rate: "" },
+        rating: "",
       },
     };
   },
@@ -138,12 +138,11 @@ export default {
         description: "NA",
         category: this.editProduct.category,
         image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        rating: { rate: this.editProduct.rating.rate, count: 120 },
+        rating: this.editProduct.rating,
       };
 
       this.handleEditProduct(product);
-      //   console.log(product);
-      this.$router.push("/");
+      return this.$router.push("/");
     },
 
     ...mapActions(useProductStore, ["handleEditProduct"]),
@@ -156,11 +155,9 @@ export default {
       vm.editId = to.params.id;
       let product = vm.products.find((item) => item.id === +to.params.id);
       vm.editProduct.title = product.title;
-      vm.editProduct.rating.rate = product.rating.rate;
+      vm.editProduct.rating = product.rating.rate;
       vm.editProduct.category = product.category;
       vm.editProduct.price = product.price;
-
-      //   console.log(vm.editId, vm.editProduct);
     });
   },
 

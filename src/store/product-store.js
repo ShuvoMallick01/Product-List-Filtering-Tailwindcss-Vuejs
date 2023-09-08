@@ -8,8 +8,6 @@ export const useProductStore = defineStore("products", {
     products: [...products],
     filter: { category: "", sort: "", rating: "", search: "" },
     selected: [],
-    // createProduct: { title: "", price: "", category: "", rating: { rate: "" } },
-    // editId: null,
   }),
 
   getters: {
@@ -66,28 +64,20 @@ export const useProductStore = defineStore("products", {
     // Create Product
     handleCreateProduct(product) {
       this.products.push(product);
-      console.log(product);
-
-      this.createProduct = {
-        title: "",
-        price: "",
-        category: "",
-        rating: { rate: "" },
-      };
     },
 
     // Product Edit
     handleEditProduct(product) {
-      this.products = this.products.map((product) =>
-        product.id === +product.id
+      this.products = this.products.map((item) =>
+        item.id === +product.id
           ? {
-              ...product,
+              ...item,
               title: product.title,
               price: product.price,
               category: product.category,
-              rating: { rate: product.rating.rate },
+              rating: { rate: product.rating },
             }
-          : product
+          : item
       );
 
       console.log(product, this.products[0]);
