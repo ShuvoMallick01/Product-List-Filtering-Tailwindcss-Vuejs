@@ -1,9 +1,9 @@
 <template>
-  <div v-if="hasFilterApplied" class="flex items-center gap-2 mt-5">
+  <div v-if="hasFilterApplied" class="flex items-center gap-3 mt-5">
     <div v-for="item in filterList" :key="item">
       <span
         v-if="filter[item]"
-        class="inline-flex items-center cursor-pointer px-2 py-1 mr-2 text-sm font-medium text-grey-800 bg-slate-300 rounded-md"
+        class="inline-flex items-center cursor-pointer px-2 py-1 text-sm font-medium text-grey-800 bg-slate-300 rounded-md"
       >
         {{ filter[item] }}
         <button

@@ -38,10 +38,16 @@
         >
           &times;
         </button>
-
-        <button class="hover:text-red-400" @click="productEdit(product.id)">
+        {{ $router.params }}
+        <router-link
+          class="hover:text-red-400"
+          :to="`/editproduct/${product.id}`"
+        >
           <i class="fa-regular fa-pen-to-square"></i>
-        </button>
+        </router-link>
+        <!-- <route class="hover:text-red-400" @click="productEdit(product.id)">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </route> -->
       </div>
     </td>
   </tr>
@@ -51,6 +57,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { useProductStore } from "../store/product-store";
+import EditProduct from "../pages/EditProduct.vue";
 
 export default {
   props: {
@@ -70,11 +77,11 @@ export default {
   },
 
   methods: {
-    productEdit(productId) {
-      // console.log(productId);
-      this.handleProductEdit(productId);
-      this.$router.push("/createproduct");
-    },
+    // productEdit(productId) {
+    //   // console.log(productId);
+    //   this.handleProductEdit(productId);
+    //   this.$router.push("/createproduct");
+    // },
 
     ...mapActions(useProductStore, [
       "handleProductDelete",

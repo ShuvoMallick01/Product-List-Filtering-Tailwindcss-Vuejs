@@ -1,11 +1,11 @@
 <template>
   <section class="container mx-auto px-4 py-5">
     <h2 class="text-slate-200 text-2xl py-5 mb-5 font-semibold">
-      Create Product
+      Edit Product | Product ID: {{ editId }}
     </h2>
 
     <!-- Form -->
-    <form @submit.prevent="createForm">
+    <form @submit.prevent="submitForm">
       <div class="relative z-0 w-full mb-6 group">
         <input
           type="text"
@@ -14,7 +14,7 @@
           class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
-          v-model="createProduct.title"
+          v-model="editProduct.title"
         />
 
         <label
@@ -35,7 +35,7 @@
             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
-            v-model="createProduct.rating.rate"
+            v-model="editProduct.rating.rate"
           />
 
           <label
@@ -51,7 +51,7 @@
             id="rating"
             class="block py-2.5 capitalize px-0 w-full text-sm bg-gray-900 border-0 border-b-2 appearance-none text-gray-400 border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer optional:py-3"
             required
-            v-model="createProduct.category"
+            v-model="editProduct.category"
           >
             <option
               class="text-gray-600 disabled:text-slate-400"
@@ -83,7 +83,7 @@
           class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
-          v-model="createProduct.price"
+          v-model="editProduct.price"
         />
 
         <label
@@ -97,7 +97,7 @@
         type="submit"
         class="text-white me-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
-        Create
+        Update
       </button>
 
       <router-link
@@ -119,7 +119,8 @@ import { useProductStore } from "../store/product-store";
 export default {
   data() {
     return {
-      createProduct: {
+      editId: null,
+      editProduct: {
         title: "",
         price: "",
         category: "",
@@ -129,27 +130,42 @@ export default {
   },
 
   methods: {
-    createForm() {
+    submitForm() {
       let product = {
-        id: Number(this.products.length) + 1,
-        title: this.createProduct.title,
-        price: this.createProduct.price,
+        id: this.editId,
+        title: this.editProduct.title,
+        price: this.editProduct.price,
         description: "NA",
-        category: this.createProduct.category,
+        category: this.editProduct.category,
         image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        rating: { rate: this.createProduct.rating.rate, count: 120 },
+        rating: { rate: this.editProduct.rating.rate, count: 120 },
       };
 
-      this.handleCreateProduct(product);
+      this.handleEditProduct(product);
+      //   console.log(product);
       this.$router.push("/");
     },
 
-    ...mapActions(useProductStore, ["handleCreateProduct"]),
+    ...mapActions(useProductStore, ["handleEditProduct"]),
+  },
+
+  beforeRouteEnter(to, form, next) {
+    console.log(to, form);
+
+    next((vm) => {
+      vm.editId = to.params.id;
+      let product = vm.products.find((item) => item.id === +to.params.id);
+      vm.editProduct.title = product.title;
+      vm.editProduct.rating.rate = product.rating.rate;
+      vm.editProduct.category = product.category;
+      vm.editProduct.price = product.price;
+
+      //   console.log(vm.editId, vm.editProduct);
+    });
   },
 
   computed: {
-    // ...mapWritableState(useProductStore, ["createProduct"]),
-    ...mapState(useProductStore, ["categories", "products", "createProduct"]),
+    ...mapState(useProductStore, ["categories", "products"]),
   },
 };
 </script>

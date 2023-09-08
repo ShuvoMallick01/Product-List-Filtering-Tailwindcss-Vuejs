@@ -8,8 +8,8 @@ export const useProductStore = defineStore("products", {
     products: [...products],
     filter: { category: "", sort: "", rating: "", search: "" },
     selected: [],
-    createProduct: { title: "", price: "", category: "", rating: { rate: "" } },
-    editId: null,
+    // createProduct: { title: "", price: "", category: "", rating: { rate: "" } },
+    // editId: null,
   }),
 
   getters: {
@@ -64,49 +64,33 @@ export const useProductStore = defineStore("products", {
 
   actions: {
     // Create Product
-    handleCreateProduct(product, productId) {
-      if (this.editId) {
-        this.products = this.products.map((product) =>
-          product.id === this.editId
-            ? {
-                ...product,
-                title: this.createProduct.title,
-                price: this.createProduct.price,
-                category: this.createProduct.category,
-                rating: { rate: this.createProduct.rating.rate },
-              }
-            : product
-        );
+    handleCreateProduct(product) {
+      this.products.push(product);
+      console.log(product);
 
-        this.createProduct = {
-          title: "",
-          price: "",
-          category: "",
-          rating: { rate: "" },
-        };
-        this.editId = "";
-      } else {
-        this.products.push(product);
-        console.log(product);
-
-        this.createProduct = {
-          title: "",
-          price: "",
-          category: "",
-          rating: { rate: "" },
-        };
-      }
+      this.createProduct = {
+        title: "",
+        price: "",
+        category: "",
+        rating: { rate: "" },
+      };
     },
 
     // Product Edit
-    handleProductEdit(productId) {
-      this.editId = productId;
-      let findProduct = this.products.find((pro) => pro.id === productId);
+    handleEditProduct(product) {
+      this.products = this.products.map((product) =>
+        product.id === +product.id
+          ? {
+              ...product,
+              title: product.title,
+              price: product.price,
+              category: product.category,
+              rating: { rate: product.rating.rate },
+            }
+          : product
+      );
 
-      this.createProduct.title = findProduct.title;
-      this.createProduct.price = findProduct.price;
-      this.createProduct.category = findProduct.category;
-      this.createProduct.rating.rate = findProduct.rating.rate;
+      console.log(product, this.products[0]);
     },
 
     // Filter Delete

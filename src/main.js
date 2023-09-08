@@ -1,8 +1,7 @@
 import "./assets/css/main.css";
-
 import { createApp } from "vue";
-import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
+import { router } from "./router/routes";
 
 // PLUGINS
 import VueSweetalert2 from "vue-sweetalert2";
@@ -20,27 +19,12 @@ import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import Layout from "./components/Layout.vue";
 
-// IMPORT PAGE
-import Home from "./pages/Home.vue";
-import CreateProduct from "./pages/CreateProduct.vue";
-
 // MAIN APP
 const app = createApp(App);
 
 // PINIA IMPORT
 import { createPinia } from "pinia";
 const pinia = createPinia();
-
-// ROUTE
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    { path: "/", component: Home, name: "home" },
-    { path: "/createproduct", component: CreateProduct, name: "createproduct" },
-
-    // { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
-  ],
-});
 
 // USE
 app.use(router);
